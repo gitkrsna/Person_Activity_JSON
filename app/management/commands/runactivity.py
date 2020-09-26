@@ -39,9 +39,9 @@ class Command(BaseCommand):
             sleep(0.1)
             activity_extend=ActivityPeriod(user= user, start_time=faker.date_time_this_year(), end_time=faker.date_time_this_year())
             activity_extend.save()
+
             activity_extend=ActivityPeriod(user= user, start_time=faker.date_time_this_year(), end_time=faker.date_time_this_year())
             activity_extend.save()
-        
 
         self.stdout.write(self.style.SUCCESS('Activity records saved successfully.'))    
 
