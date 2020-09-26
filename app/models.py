@@ -1,6 +1,7 @@
 from django.db import models
 
 class User(models.Model):
+    id = models.CharField(max_length=10,blank=True, primary_key=True)
     real_name= models.CharField(max_length=20,  blank=True)
     tz= models.CharField(max_length=20, blank=True)
 

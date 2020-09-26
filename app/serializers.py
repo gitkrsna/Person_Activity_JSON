@@ -13,7 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
     person_activity = ActivityPeriodSerializer(read_only=True, many=True)
     class Meta:
         model = User
-        fields = ('real_name', 'tz', 'person_activity')
+        fields = ('id', 'real_name', 'tz', 'person_activity')
         
 
 

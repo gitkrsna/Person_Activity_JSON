@@ -1,5 +1,6 @@
 import datetime
 from faker import Faker
+import secrets
 from django.core.management.base import BaseCommand
 from time import sleep
 from app.models import User, ActivityPeriod
@@ -12,14 +13,17 @@ class Command(BaseCommand):
     
 
     def handle(self, *args, **options):
+        secret_k = secrets.token_hex(16)
+
+        user_pk = secret_k[:10]
         records = []
-        for _ in range(100):
+        for i in range(100):
             sleep(0.1)
             kwargs = {
                     
-                'user' : User.objects.create(real_name=faker.name(), tz=faker.timezone()),
-                'start_time': faker.date_time(),
-                'end_time' : faker.date_time(),
+                'user' : User.objects.create(id= user_pk+str(i), real_name=faker.name(), tz=faker.timezone()),
+                'start_time': faker.date_time_this_year(),
+                'end_time' : faker.date_time_this_year(),
                 
              }
 
@@ -33,9 +37,9 @@ class Command(BaseCommand):
         
         for user in users:
             sleep(0.1)
-            activity_extend=ActivityPeriod(user= user, start_time=faker.date_time(), end_time=faker.date_time())
+            activity_extend=ActivityPeriod(user= user, start_time=faker.date_time_this_year(), end_time=faker.date_time_this_year())
             activity_extend.save()
-            activity_extend=ActivityPeriod(user= user, start_time=faker.date_time(), end_time=faker.date_time())
+            activity_extend=ActivityPeriod(user= user, start_time=faker.date_time_this_year(), end_time=faker.date_time_this_year())
             activity_extend.save()
         
 
